@@ -14,9 +14,10 @@ public:
     }
 
     class DisjointSet {
+        public:
         vector<int> parent, size;
 
-    public:
+   
         DisjointSet(int n) {
             parent.resize(n + 1);
             size.resize(n + 1, 1);
@@ -70,30 +71,36 @@ public:
                 ds.unionBySize(u, v);
             }
         }
+        
+        unordered_map<int,int> mp;
+        for(int i = 0;i<n;i++){
+            mp[ds.findUPar(i)]++;
+        }
+        int comp = mp.size();
 
         // Build adjacency list
-        vector<vector<int>> adj(n);
+        // vector<vector<int>> adj(n);
 
-        for (auto edge : connections) {
+        // for (auto edge : connections) {
 
-            int u = edge[0];
-            int v = edge[1];
+        //     int u = edge[0];
+        //     int v = edge[1];
 
-            adj[u].push_back(v);
-            adj[v].push_back(u);
-        }
+        //     adj[u].push_back(v);
+        //     adj[v].push_back(u);
+        // }
 
  
-        vector<int> visited(n, 0);
-        int comp = 0;
+        // vector<int> visited(n, 0);
+        // int comp = 0;
 
-        for (int i = 0; i < n; i++) {
+        // for (int i = 0; i < n; i++) {
 
-            if (!visited[i]) {
-                comp++;
-                dfs(visited, adj, i);
-            }
-        }
+        //     if (!visited[i]) {
+        //         comp++;
+        //         dfs(visited, adj, i);
+        //     }
+        // }
 
         if (cycles >= comp - 1) {
             return comp - 1;
